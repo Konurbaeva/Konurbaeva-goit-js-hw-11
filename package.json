@@ -26,6 +26,9 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
-    "axios": "^0.26.0"
+    "axios": "^0.26.0",
+    "lodash.debounce": "^4.0.8",
+    "pixabay": "0.0.1",
+    "simplelightbox": "^2.10.2"
   }
 }
