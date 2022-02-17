@@ -1,7 +1,7 @@
 const settings = {
-    movieKey: '76ed63f80dba3e42bfe198c0806fa9ba',
-    movieApiUrl: 'https://api.themoviedb.org/3',
-    MOCK_API_URL: 'https://620a924592946600171c5b5c.mockapi.io/api/v1',
+    BASE_URL: 'https://pixabay.com/api',
+    API_KEY: '25748459-63f23aee85add1030efa422f3'
   };
   
   export default settings;
+

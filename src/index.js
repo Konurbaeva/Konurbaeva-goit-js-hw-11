@@ -1,13 +1,20 @@
 // import './sass/main.scss';
 import API from './api-service';
+import settings from './settings';
 
-const url = 'https://pixabay.com/api';
+const url = settings.BASE_URL;
 const options = {
     headers: {
-      Authorization: '25748459-63f23aee85add1030efa422f3',
-    },
+      Authorization: settings.API_KEY,
+   //   Access-Control-Allow-Origin: url,
+    }
   };
 
-  fetch(url, options)
+/*   fetch(url, options)
   .then(r => r.json())
-  .then(console.log); 
+  .then(console.log);  */
+
+  searchQuery()
+
+  console.log('settings: ' + settings.BASE_URL);
+  console.log('window.location.href: ' + window.location.href);
