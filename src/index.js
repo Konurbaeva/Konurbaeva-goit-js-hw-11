@@ -2,7 +2,7 @@
 
 import debounce from 'lodash.debounce';
 import apiSettings from './settings';
-import getSearchResult from './js/gallery-api';
+import searchQuery from './js/api-service';
 import getRefs from './js/get-refs';
 
 const { BASE_URL, API_KEY } = apiSettings;
@@ -10,35 +10,35 @@ const { BASE_URL, API_KEY } = apiSettings;
 const DEBOUNCE_DELAY = 300;
 const refs = getRefs();
 
-const form = document.querySelector('.search-form');
-const searchInput = document.querySelector('input[name="searchQuery"]');
+
+// form.addEventListener('input',  debounce(onSearch, DEBOUNCE_DELAY));
+// refs.searchForm.addEventListener('input',  debounce(onSearch, DEBOUNCE_DELAY));
+refs.inputEl.addEventListener('input',  debounce(onSearch, DEBOUNCE_DELAY));
 
 
-form.addEventListener('input',  debounce(handleSearch, DEBOUNCE_DELAY));
+function onSearch(e){
 
-function handleSearch(e){
+/*     const form = e.currentTarget;
+    const searchQuery = form.elements.query.value; */
     e.preventDefault();
-    console.log('search...', searchInput.value);
+    const searchQuery = refs.inputEl.value;
 
-    BASE_URL.getSearchResult(searchInput.value)
+    
+    console.log('search...', searchQuery);
+
+    searchQuery(searchQuery)
     .then(checkResponse)
-    .catch(onFetchError);
+    .catch(onFetchError)
+    .finally(() => form.reset());
 }
 
 function checkResponse(response) {
-    console.log('response: ', response);
+    console.log('response: ', response.json());
 }
 
 function onFetchError(error) {
     console.error('error: ', error);
    }
 
-/*   getSearchResult('cat')
-  .then(response => response.json())
-  .catch(console.error); */
-
-  console.log('handleSearch: ' + typeof handleSearch);
-  console.log('settings: ' + apiSettings.BASE_URL);
-  console.log('window.location.href: ' + window.location.href);
 
   
