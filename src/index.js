@@ -1,20 +1,26 @@
 // import './sass/main.scss';
-import API from './api-service';
-import settings from './settings';
 
-const url = settings.BASE_URL;
-const options = {
-    headers: {
-      Authorization: settings.API_KEY,
-   //   Access-Control-Allow-Origin: url,
-    }
-  };
+import apiSettings from './settings';
+//import getSearchResult from './js/pixabay-api';
+import getSearchResult from './js/pixabay-api';
 
-/*   fetch(url, options)
-  .then(r => r.json())
-  .then(console.log);  */
+const form = document.querySelector('.search-form');
+const searchInput = document.querySelector('input[name="searchQuery"]');
 
-  searchQuery()
 
-  console.log('settings: ' + settings.BASE_URL);
+form.addEventListener('submit', handleSearch);
+
+function handleSearch(e){
+    e.preventDefault();
+    console.log('search...', searchInput.value);
+}
+
+  getSearchResult('cat')
+  .then(response => response.json())
+  .catch(console.error);
+
+
+  console.log('settings: ' + apiSettings.BASE_URL);
   console.log('window.location.href: ' + window.location.href);
+
+  
