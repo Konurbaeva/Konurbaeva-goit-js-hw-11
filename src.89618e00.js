@@ -64,7 +64,9 @@ module.exports={version:"0.26.0"};
 module.exports=require("./lib/axios");
 },{"./lib/axios":"nUiQ"}],"O5zp":[function(require,module,exports) {
 "use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.getSearchResult=void 0;var e=o(require("axios")),t=o(require("../settings"));function o(e){return e&&e.__esModule?e:{default:e}}const{BASE_URL:r,API_KEY:s}=t.default,u=(t,o=1)=>e.default.get(`${r}/?key=${s}&q=encodeURIComponent(${t})&image_type=photo`);exports.getSearchResult=u;
-},{"axios":"dZBD","../settings":"LXja"}],"Focm":[function(require,module,exports) {
-"use strict";var e=t(require("./settings")),o=t(require("./js/pixabay-api"));function t(e){return e&&e.__esModule?e:{default:e}}const n=document.querySelector(".search-form"),r=document.querySelector('input[name="searchQuery"]');function c(e){e.preventDefault(),console.log("search...",r.value)}n.addEventListener("submit",c),(0,o.default)("cat").then(e=>e.json()).catch(console.error),console.log("settings: "+e.default.BASE_URL),console.log("window.location.href: "+window.location.href);
-},{"./settings":"LXja","./js/pixabay-api":"O5zp"}]},{},["Focm"], null)
-//# sourceMappingURL=/parcel-project-template/src.a1b48f7d.js.map
+},{"axios":"dZBD","../settings":"LXja"}],"EGsz":[function(require,module,exports) {
+"use strict";function e(){return{searchBox:document.querySelector('input[name="searchQuery"]'),form:document.querySelector(".search-form"),button:document.querySelector('button[type="submit"]')}}Object.defineProperty(exports,"__esModule",{value:!0}),exports.default=e;
+},{}],"Focm":[function(require,module,exports) {
+"use strict";var e=r(require("./settings")),t=r(require("./js/pixabay-api")),o=r(require("./js/get-refs"));function r(e){return e&&e.__esModule?e:{default:e}}const n=(0,o.default)(),s=document.querySelector(".search-form"),u=document.querySelector('input[name="searchQuery"]');function c(e){e.preventDefault(),console.log("search...",u.value)}s.addEventListener("submit",c),(0,t.default)("cat").then(e=>e.json()).catch(console.error),console.log("settings: "+e.default.BASE_URL),console.log("window.location.href: "+window.location.href);
+},{"./settings":"LXja","./js/pixabay-api":"O5zp","./js/get-refs":"EGsz"}]},{},["Focm"], null)
+//# sourceMappingURL=/parcel-project-template/src.89618e00.js.map
