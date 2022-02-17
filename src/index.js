@@ -3,6 +3,9 @@
 import apiSettings from './settings';
 //import getSearchResult from './js/pixabay-api';
 import getSearchResult from './js/pixabay-api';
+import getRefs from './js/get-refs';
+
+const refs = getRefs();
 
 const form = document.querySelector('.search-form');
 const searchInput = document.querySelector('input[name="searchQuery"]');
