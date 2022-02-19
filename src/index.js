@@ -1,4 +1,5 @@
 // import './sass/main.scss';
+import axios from 'axios';
 import apiSettings from './settings';
 import searchKeyword from './js/api-service';
 // import getSearchResult from './js/api-service';
@@ -15,12 +16,17 @@ const searchForm = document.querySelector('.search-form');
 
 searchForm.addEventListener('submit', onSearch);
 
-function getSearchResult(q, page = 1){
+/* function getSearchResult(q, page = 1){
   return fetch(`${BASE_URL}/?key=${API_KEY}&q=${q}`)
   .then((response) => {
     return response.json();
   })
+ };  */
+
+ function getSearchResult(q, page = 1){
+  return axios.get(`${BASE_URL}/?key=${API_KEY}&q=${q}`)
  }; 
+
 
 function onSearch(event) {
     event.preventDefault();
@@ -44,7 +50,7 @@ function onFetchError(error) {
  const galleryEl = document.querySelector('.gallery');
 
   function render(response){
-    const markup = handlebarTemplate(response.hits);
+    const markup = handlebarTemplate(response.data.hits);
     galleryEl.innerHTML = markup;
    }
 
