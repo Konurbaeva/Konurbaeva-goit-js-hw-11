@@ -9,12 +9,10 @@ import getRefs from './js/get-refs';
 const { BASE_URL, API_KEY } = apiSettings;
 
 //const refs = getRefs();
-// refs.searchForm.addEventListener('submit',  debounce(onSearch, DEBOUNCE_DELAY));
-//refs.searchForm.addEventListener('submit',  debounce(filterCountriesChange, DEBOUNCE_DELAY));
 
 const inputEl = document.querySelector('input[name="searchQuery"]');
 const searchForm = document.querySelector('.search-form');
-// const button = document.querySelector('button[type="submit"]');
+
 
 searchForm.addEventListener('submit',  filterChange);
 
@@ -27,7 +25,7 @@ function getSearchResult(q, page = 1){
 
 function filterChange(event) {
     event.preventDefault();
-    
+
     console.log('inputEl.currentTarget.value: ' + inputEl.value);
 
     return getSearchResult(inputEl.value)
