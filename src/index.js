@@ -16,13 +16,6 @@ const searchForm = document.querySelector('.search-form');
 
 searchForm.addEventListener('submit', onSearch);
 
-/* function getSearchResult(q, page = 1){
-  return fetch(`${BASE_URL}/?key=${API_KEY}&q=${q}`)
-  .then((response) => {
-    return response.json();
-  })
- };  */
-
  function getSearchResult(q, page = 1){
   return axios.get(`${BASE_URL}/?key=${API_KEY}&q=${q}`)
  }; 
