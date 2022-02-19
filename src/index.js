@@ -8,7 +8,7 @@ import getRefs from './js/get-refs';
 // import renderSearchResult from './template/gallery';
 import handlebarTemplate from './template/handlebarTemplate';
 
-const { BASE_URL, API_KEY } = apiSettings;
+const { BASE_URL, API_KEY, image_type } = apiSettings;
 
 //const refs = getRefs();
 
@@ -17,9 +17,15 @@ const searchForm = document.querySelector('.search-form');
 
 searchForm.addEventListener('submit', onSearch);
 
- function getSearchResult(q, page = 1){
-  return axios.get(`${BASE_URL}/?key=${API_KEY}&q=${q}`)
+
+function getSearchResult(q, page = 1){
+  return axios.get(`${BASE_URL}/?key=${API_KEY}&q=${q}&image_type=${image_type}`)
  }; 
+
+
+/*  function getSearchResult(q, page = 1){
+  return axios.get(`${BASE_URL}/?key=${API_KEY}&q=${q}`)
+ };  */
 
 
 function onSearch(event) {
