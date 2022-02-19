@@ -74,4 +74,4 @@ module.exports=require("./lib/axios");
 },{}],"Focm":[function(require,module,exports) {
 "use strict";var e=u(require("lodash.debounce")),r=u(require("./settings")),t=u(require("./js/api-service")),n=u(require("./js/get-refs"));function u(e){return e&&e.__esModule?e:{default:e}}const{BASE_URL:o,API_KEY:c}=r.default,s=document.querySelector('input[name="searchQuery"]'),i=document.querySelector(".search-form");function l(e,r=1){return fetch(`${o}/?key=${c}&q=${e}`).then(e=>e.json())}function a(e){return e.preventDefault(),console.log("inputEl.currentTarget.value: "+s.value),l(s.value).then(f).catch(d)}function f(e){console.log("response: ",e)}function d(e){console.error("error: ",e)}i.addEventListener("submit",a);
 },{"lodash.debounce":"PZFh","./settings":"LXja","./js/api-service":"hC31","./js/get-refs":"EGsz"}]},{},["Focm"], null)
-//# sourceMappingURL=/parcel-project-template/src.c97730f6.js.map
+//# sourceMappingURL=/parcel-project-template/src.a4c4b8d8.js.map
