@@ -3,41 +3,42 @@
 import debounce from 'lodash.debounce';
 import apiSettings from './settings';
 import searchKeyword from './js/api-service';
+// import getSearchResult from './js/api-service';
 import getRefs from './js/get-refs';
 
 const { BASE_URL, API_KEY } = apiSettings;
 
-const DEBOUNCE_DELAY = 300;
-const refs = getRefs();
+//const refs = getRefs();
+// refs.searchForm.addEventListener('submit',  debounce(onSearch, DEBOUNCE_DELAY));
+//refs.searchForm.addEventListener('submit',  debounce(filterCountriesChange, DEBOUNCE_DELAY));
 
+const inputEl = document.querySelector('input[name="searchQuery"]');
+const searchForm = document.querySelector('.search-form');
+// const button = document.querySelector('button[type="submit"]');
 
-// form.addEventListener('input',  debounce(onSearch, DEBOUNCE_DELAY));
-// refs.searchForm.addEventListener('input',  debounce(onSearch, DEBOUNCE_DELAY));
+searchForm.addEventListener('submit',  filterChange);
 
+function getSearchResult(q, page = 1){
+  return fetch(`${BASE_URL}/?key=${API_KEY}&q=${q}`)
+  .then((response) => {
+    return response.json();
+  })
+ }; 
 
-// refs.inputEl.addEventListener('input',  debounce(onSearch, DEBOUNCE_DELAY));
+function filterChange(event) {
+    event.preventDefault();
+    
+    console.log('inputEl.currentTarget.value: ' + inputEl.value);
 
-refs.inputEl.addEventListener('input',  debounce(onSearch, DEBOUNCE_DELAY));
-
-
-function onSearch(e){
-
-    e.preventDefault();
-    const searchQuery = refs.inputEl.value;
-
-    searchKeyword('cat')
-    .then(checkResponse)
-    .catch(onFetchError)
-    .finally(() => form.reset());
-}
+    return getSearchResult(inputEl.value)
+      .then(checkResponse)
+      .catch(onFetchError);
+  }
 
 function checkResponse(response) {
-    console.log('response: ', response.json());
+    console.log('response: ', response);
 }
 
 function onFetchError(error) {
     console.error('error: ', error);
    }
-
-
-  
