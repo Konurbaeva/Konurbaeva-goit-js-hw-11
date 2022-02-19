@@ -1,36 +1,40 @@
-// import { galleryItems } from './gallery-items.js';
-
-// console.log(galleryItems);
-
-
 const galleryEl = document.querySelector('.gallery');
 
-/* const lightBoxMarkup = item => {
-    const { description, original, preview } = item;
-  
-    return `
-    <a class="gallery__item" href="${original}">
-  <img class="gallery__image" src="${preview}" alt="${description}" />
-</a>
-    `;
-};
- */
-
 const lightBoxMarkup = item => {
-    const { webformatURL, largeImageURL, tags, likes, views, comments, downloads } = item;
+   // const { webformatURL, largeImageURL, tags, likes, views, comments, downloads } = item;
+   const { webformatURL, likes, views, comments, downloads } = item;
   
     return `
-    <a class="gallery__item" href="${webformatURL}">
-   <img class="gallery__image" src="${webformatURL}" alt="image" />
-</a>
+    <div class="photo-card">
+  <img src="${webformatURL}" alt="" loading="lazy" />
+  <div class="info">
+    <p class="info-item">
+      <b>${likes}</b>
+    </p>
+    <p class="info-item">
+      <b>${views}</b>
+    </p>
+    <p class="info-item">
+      <b>${comments}</b>
+    </p>
+    <p class="info-item">
+      <b>${downloads}</b>
+    </p>
+  </div>
+</div>
     `;
 };
-
 
   
 const lightBoxGalleryInserted = galleryItems
   .map(lightBoxMarkup)
   .join('');
+
+
+export function renderSearchResult(result) {
+  const markup = lightBoxMarkup(result);
+  galleryEl.innerHTML = markup;
+ }
 
   const handler = (event) => {
     event.preventDefault();
@@ -44,7 +48,7 @@ gallery.on('error.simplelightbox', function (e) {
 	console.log(e); 
 });
 }
-  
+
   
 galleryEl.insertAdjacentHTML('beforeend', lightBoxGalleryInserted);
 galleryEl.addEventListener('click', handler);
