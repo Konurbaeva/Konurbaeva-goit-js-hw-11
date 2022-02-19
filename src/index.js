@@ -21,8 +21,7 @@ refs.searchForm.addEventListener('submit', onSearch);
 
 function onSearch(event) {
     event.preventDefault();
-
-    console.log('inputEl.value: ' + refs.inputEl.value);
+    console.log('refs.inputEl.value: ' + refs.inputEl.value);
 
     return getSearchResult(refs.inputEl.value)
       .then(checkResponse)
@@ -42,6 +41,10 @@ function onFetchError(error) {
     Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
    }  
 
+   function totalMatches(total) {
+    Notiflix.Notify.success(`Hooray! We found ${total} images.`)
+   }
+
  const galleryEl = document.querySelector('.gallery');
 
 function render(response){
@@ -49,6 +52,7 @@ function render(response){
     noMatches()
    } else {
     const markup = handlebarTemplate(response.data.hits);
+    totalMatches(response.data.total);
     galleryEl.innerHTML = markup;
     galleryEl.insertAdjacentHTML('beforeend', markup);
    }
