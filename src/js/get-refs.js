@@ -3,6 +3,7 @@ export default function getRefs() {
       inputEl: document.querySelector('input[name="searchQuery"]'),
       searchForm: document.querySelector('.search-form'),
       button: document.querySelector('button[type="submit"]'),
-      galleryEl: document.querySelector('.gallery')
+      galleryEl: document.querySelector('.gallery'),
+      loadMoreButton: document.querySelector('button.load-more')
     };
   }

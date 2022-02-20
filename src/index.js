@@ -1,10 +1,6 @@
 // import './sass/main.scss';
 import axios from 'axios';
 import Notiflix from 'notiflix';
-// Описан в документации
-import SimpleLightbox from 'simplelightbox';
-// Дополнительный импорт стилей
-import 'simplelightbox/dist/simple-lightbox.min.css';
 
 import apiSettings from './settings';
 import searchKeyword from './js/api-service';
@@ -12,38 +8,35 @@ import getRefs from './js/get-refs';
 // import renderSearchResult from './template/gallery';
 // import getSearchResult from './js/api-service';
 import handlebarTemplate from './template/handlebarTemplate';
+import simpleLightbox from './js/lightBox';
+import PixabayApiService from './js/api-service';
 
 const { BASE_URL, API_KEY, image_type } = apiSettings;
-
 const refs = getRefs();
+
 
 refs.searchForm.addEventListener('submit', onSearch);
 
-
- function getSearchResult(q, page = 1, perPage = 20){
-  return axios.get(`${BASE_URL}/?key=${API_KEY}&q=${q}&image_type=${image_type}&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`)
- }; 
+function getSearchResult(q, page = 1, perPage = 20){
+   const pixabayUrl = `${BASE_URL}/?key=${API_KEY}&q=${q}&image_type=${image_type}&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`
+   return axios.get(pixabayUrl);
+ };
 
 function onSearch(event) {
     event.preventDefault();
-    console.log('refs.inputEl.value: ' + refs.inputEl.value);
-    
     clearInputOnFocus();
+
+    console.log('refs.inputEl.value: ', refs.inputEl.value);
+
     return getSearchResult(refs.inputEl.value)
       .then(checkResponse)
       .catch(onFetchError);
   }
 
-
-function clearProductList(){
-  refs.inputEl.innerHTML = '';
-};
-
 function render(response){
-  clearProductList();
 
    if(response.data.hits.length === 0){
-    noMatches()
+    noMatches();
    } else {
     const markup = handlebarTemplate(response.data.hits);
     totalMatches(response.data.total);
@@ -74,17 +67,12 @@ function onFetchError(error) {
     event.target.value = '';    
   }) }
 
-function onImageClick(event) {
-  event.preventDefault();
 
-  let gallery = new SimpleLightbox('.gallery a', {captionsData: `alt`, captionDelay: 250});
-  gallery.on('show.simplelightbox', function () {
-    console.log('gallery on '); 
-});
+  function onImageClick(event) {
+    event.preventDefault();
+   // simpleLightbox.open();
+ 
+  }
+  
+  refs.galleryEl.addEventListener('click', onImageClick); 
 
-gallery.on('error.simplelightbox', function (e) {
-console.log(e); 
-});
-}
-
-refs.galleryEl.addEventListener('click', onImageClick);
