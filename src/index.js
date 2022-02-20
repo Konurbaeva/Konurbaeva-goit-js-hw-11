@@ -18,7 +18,6 @@ const { BASE_URL, API_KEY, image_type } = apiSettings;
 const refs = getRefs();
 
 refs.searchForm.addEventListener('submit', onSearch);
-const galleryEl = document.querySelector('.gallery');
 
 
  function getSearchResult(q, page = 1, perPage = 20){
@@ -48,8 +47,8 @@ function render(response){
    } else {
     const markup = handlebarTemplate(response.data.hits);
     totalMatches(response.data.total);
-    galleryEl.innerHTML = markup;
-    galleryEl.insertAdjacentHTML('beforeend', markup);
+    refs.galleryEl.innerHTML = markup;
+    refs.galleryEl.insertAdjacentHTML('beforeend', markup);
    }
    }
 
@@ -88,4 +87,4 @@ console.log(e);
 });
 }
 
-galleryEl.addEventListener('click', onImageClick);
+refs.galleryEl.addEventListener('click', onImageClick);

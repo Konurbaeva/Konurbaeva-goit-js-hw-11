@@ -1,4 +1,5 @@
-const galleryEl = document.querySelector('.gallery');
+import getRefs from './js/get-refs';
+const refs = getRefs();
 
 const lightBoxMarkup = item => {
    // const { webformatURL, largeImageURL, tags, likes, views, comments, downloads } = item;
@@ -33,7 +34,7 @@ const lightBoxGalleryInserted = galleryItems
 
 export function renderSearchResult(result) {
   const markup = lightBoxMarkup(result);
-  galleryEl.innerHTML = markup;
+  refs.galleryEl.innerHTML = markup;
  }
 
   const handler = (event) => {
@@ -50,5 +51,5 @@ gallery.on('error.simplelightbox', function (e) {
 }
 
   
-galleryEl.insertAdjacentHTML('beforeend', lightBoxGalleryInserted);
-galleryEl.addEventListener('click', handler);
+refs.galleryEl.insertAdjacentHTML('beforeend', lightBoxGalleryInserted);
+refs.galleryEl.addEventListener('click', handler);
