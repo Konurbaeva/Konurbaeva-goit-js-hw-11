@@ -1,7 +1,11 @@
 // import './sass/main.scss';
 import axios from 'axios';
 import Notiflix from 'notiflix';
+// Описан в документации
 import SimpleLightbox from 'simplelightbox';
+// Дополнительный импорт стилей
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
 import apiSettings from './settings';
 import searchKeyword from './js/api-service';
 import getRefs from './js/get-refs';
@@ -14,6 +18,8 @@ const { BASE_URL, API_KEY, image_type } = apiSettings;
 const refs = getRefs();
 
 refs.searchForm.addEventListener('submit', onSearch);
+const galleryEl = document.querySelector('.gallery');
+
 
  function getSearchResult(q, page = 1, perPage = 20){
   return axios.get(`${BASE_URL}/?key=${API_KEY}&q=${q}&image_type=${image_type}&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`)
@@ -28,9 +34,63 @@ function onSearch(event) {
       .catch(onFetchError);
   }
 
-function checkResponse(response) {
+
+function clearProductList(){
+  refs.inputEl.innerHTML = '';
+};
+
+/* function render(response){
+  clearProductList();
+
+   if(response.data.hits.length === 0){
+    noMatches()
+   } else {
+    const markup = handlebarTemplate(response.data.hits);
+    totalMatches(response.data.total);
+    galleryEl.innerHTML = markup;
+    galleryEl.insertAdjacentHTML('beforeend', markup);
+   }
+   } */
+
+   function renderList(data) {
+    const { webformatURL, likes, views, comments, downloads } = data;
+    // const {hits} = hits;
+
+    console.log('DATA IS: ' + JSON.stringify(data));
+
+    console.log('DATA webformatURL: ' + JSON.stringify(webformatURL));
+
+   // console.log('DATA.HITS IS: ' + JSON.stringify(hits));
+
+    const markup = data.hits
+      .map((dataEntry) => {
+        return `<div class="photo-card">
+        <img src="${webformatURL}" alt="" loading="lazy" />
+        <div class="info">
+          <p class="info-item">
+            <b>${likes}</b>
+          </p>
+          <p class="info-item">
+            <b>${views}</b>
+          </p>
+          <p class="info-item">
+            <b>${comments}</b>
+          </p>
+          <p class="info-item">
+            <b>${downloads}</b>
+          </p>
+        </div>
+      </div>`;
+      })
+      .join("");
+      galleryEl.innerHTML = markup;
+  }
+
+
+   function checkResponse(response) {
     console.log('response: ', response);
-    render(response);
+   //render(response);
+   renderList(response);
 }
 
 function onFetchError(error) {
@@ -44,20 +104,6 @@ function onFetchError(error) {
    function totalMatches(total) {
     Notiflix.Notify.success(`Hooray! We found ${total} images.`)
    }
-
- const galleryEl = document.querySelector('.gallery');
-
-function render(response){
-   if(response.data.hits.length === 0){
-    noMatches()
-   } else {
-    const markup = handlebarTemplate(response.data.hits);
-    totalMatches(response.data.total);
-    galleryEl.innerHTML = markup;
-    galleryEl.insertAdjacentHTML('beforeend', markup);
-   }
-   }
-
   
 
 /* const handler = (event) => {
