@@ -1,0 +1,23 @@
+
+body {
+    font-family: "Amaranth", sans-serif;
+    text-align: center;
+    background-color: #edf3f8;
+}
+
+.photo-card {
+    display: inline-block;
+    width: 100%;
+    max-width: 350px;
+    margin: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    background: #fff;
+    box-shadow: 0 6px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.search-form {
+    background-color: teal;
+    position: relative;
+}
