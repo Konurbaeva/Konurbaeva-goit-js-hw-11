@@ -51,6 +51,11 @@ export default class ImageApiService {
     }
   }
 
+  clearInputOnFocus(){
+    refs.inputEl.addEventListener('focus', (event) => {
+     event.target.value = '';    
+   }) }
+
   get query() {
     return this.searchQuery;
   }

@@ -17,6 +17,7 @@ import lightBox from './js/lightBox';
 
  function onSearch(event){
   event.preventDefault();
+  searchApiService.clearInputOnFocus();
 
   searchApiService.query = refs.inputEl.value;
   if (searchApiService.query === '') {
