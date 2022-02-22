@@ -1,7 +1,11 @@
 import axios from 'axios';
 import { pixabay } from 'pixabay';
 import apiSettings from '../settings';
+import handlebarTemplate from '../template/handlebarTemplate.hbs';
+import Notiflix from 'notiflix';
+import getRefs from './get-refs';
 
+const refs = getRefs();
 
 const { BASE_URL, API_KEY } = apiSettings;
 
@@ -21,6 +25,8 @@ export default class ImageApiService {
        this.incrementPage();
        console.log('DATA: ' , data);
        console.log('this', this);
+      const markup = handlebarTemplate(data.hits);
+      refs.galleryEl.innerHTML = markup;
       });
   }
 
