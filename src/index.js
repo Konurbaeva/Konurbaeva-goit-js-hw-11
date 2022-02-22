@@ -18,9 +18,12 @@ import lightBox from './js/lightBox';
  function onSearch(event){
   event.preventDefault();
 
+ // searchApiService.hideLoadMoreButton();
   searchApiService.query = refs.inputEl.value;
+  if (searchApiService.query === '') {
+    return  Notiflix.Notify.warning('Cannot be empty. Please provide your searching word!');
+  }
 
- 
   searchApiService.resetPage();
   searchApiService.fetchArticles();
  }
