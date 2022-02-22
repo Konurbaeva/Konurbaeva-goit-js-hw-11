@@ -1,7 +1,7 @@
 body {
-  font-family: "Amaranth", sans-serif;
+  font-family: 100% Helvetica, sans-serif;
   text-align: center;
-  background-color: #edf3f8;
+  background-color: #fff;
 }
 
 .photo-card {
@@ -20,6 +20,10 @@ body {
 
 .search-form {
   background-color: teal;
-  position: relative;
+  border: 1px solid;
+}
+
+button {
+  color: cadetblue;
 }
 /*# sourceMappingURL=style.css.map */

@@ -5,26 +5,22 @@ import apiSettings from '../settings';
 
 const { BASE_URL, API_KEY } = apiSettings;
 
-/* const options = {
-  headers: {
-    Authorization: API_KEY,
-  },
-}; */
-
-export default class PixabayApiService {
+export default class ImageApiService {
   constructor() {
-    this.query = '';
+    this.searchQuery = '';
     this.page = 1;
     this.perPage = 20;
+    this.image_type = 'photo';
   }
 
-  fetchArticles(query) {
-    const url = `${BASE_URL}/?key=${API_KEY}&q=${query}&image_type=${image_type}&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`
-    return fetch(url)
+  fetchArticles() {
+    const url = `${BASE_URL}/?key=${API_KEY}&q=${this.searchQuery}&image_type=${this.image_type}&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.perPage}`
+    fetch(url)
       .then(response => response.json())
-      .then(({ articles }) => {
+      .then(data => {
        this.incrementPage();
-        return articles;
+       console.log('DATA: ' , data);
+       console.log('this', this);
       });
   }
 
@@ -37,10 +33,10 @@ export default class PixabayApiService {
   }
 
   get query() {
-    return this.query;
+    return this.searchQuery;
   }
 
   set query(newQuery) {
-    this.query = newQuery;
+    this.searchQuery = newQuery;
   }
 }

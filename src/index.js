@@ -4,19 +4,20 @@ import axios from 'axios';
 import Notiflix from 'notiflix';
 import apiSettings from './settings';
 import getRefs from './js/get-refs';
-import lightbox from './js/lightBox';
+import ImageApiService from './js/api-service';
+import lightBox from './js/lightBox';
 
-const { BASE_URL, API_KEY, image_type } = apiSettings;
+/* const { BASE_URL, API_KEY, image_type } = apiSettings;
 const refs = getRefs();
 
 function onImageClick(event) {
   event.preventDefault();
   console.log('event.currentTarget: ', event.currentTarget);
 
-  if(!event.currentTarget.classList.contains('card')) {
+ if(!event.currentTarget.classList.contains('card')) {
     return;
-  }
-  lightbox.open();
+  } 
+  lightBox.open();
 }
 
 refs.galleryEl.addEventListener('click', onImageClick); 
@@ -70,14 +71,28 @@ function onFetchError(error) {
     Notiflix.Notify.success(`Hooray! We found ${total} images.`)
    }
 
-      /* 
-   При поиске по новому ключевому слову необходимо полностью очищать содержимое галереи
-    */
    function clearInputOnFocus(){
     refs.inputEl.addEventListener('focus', (event) => {
      event.target.value = '';    
    }) 
+ } */
+
+ const searchApiService = new ImageApiService();
+ 
+ const refs = getRefs();
+
+ refs.searchForm.addEventListener('submit', onSearch);
+ refs.loadMoreButton.addEventListener('click', onLoadMore);
+
+
+ function onSearch(event){
+  event.preventDefault();
+
+  searchApiService.query = refs.inputEl.value;
+  searchApiService.resetPage();
+  searchApiService.fetchArticles();
  }
 
- 
- 
+ function onLoadMore(){
+   searchApiService.fetchArticles();
+ }
