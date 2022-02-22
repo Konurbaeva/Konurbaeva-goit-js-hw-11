@@ -19,8 +19,6 @@ import lightBox from './js/lightBox';
   event.preventDefault();
 
   searchApiService.query = refs.inputEl.value;
-
- 
   searchApiService.resetPage();
   searchApiService.fetchArticles();
  }

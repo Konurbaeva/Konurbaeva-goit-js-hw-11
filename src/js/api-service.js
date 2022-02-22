@@ -25,8 +25,13 @@ export default class ImageApiService {
        this.incrementPage();
        console.log('DATA: ' , data);
        console.log('this', this);
-      const markup = handlebarTemplate(data.hits);
-      refs.galleryEl.innerHTML = markup;
+
+       if(data.hits.length === 0){
+        Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+       } else {
+        const markup = handlebarTemplate(data.hits);
+        refs.galleryEl.innerHTML = markup;
+       }
       });
   }
 
