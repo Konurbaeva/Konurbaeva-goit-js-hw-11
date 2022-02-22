@@ -15,6 +15,9 @@ export default class ImageApiService {
     this.page = 1;
     this.perPage = 20;
     this.image_type = 'photo';
+    this.totalHits = null;
+    this.totalPages = null;
+    this.endOfHits = false;
   }
 
   fetchArticles() {
@@ -23,8 +26,7 @@ export default class ImageApiService {
       .then(response => response.json())
       .then(data => {
        this.incrementPage();
-       console.log('DATA: ' , data);
-       console.log('this', this);
+      
        if(data.hits.length === 0){
         Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
        } else {
@@ -42,9 +44,10 @@ export default class ImageApiService {
     this.page = 1;
   }
 
-  hideLoadMoreButton(){
-    if(this.page===0){
-      refs.loadMoreButton.style.visibility = 'hidden';
+  endOfHits() {
+    if (this.page === this.totalPages) {
+      this.endOfHits = true;
+      Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
     }
   }
 
