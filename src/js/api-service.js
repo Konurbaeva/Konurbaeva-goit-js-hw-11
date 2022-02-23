@@ -52,9 +52,14 @@ export default class ImageApiService {
       .then(response => response.json())
       .then(data => {
        this.incrementPage();
-       console.log('this', this)
+     
        console.log('data: ', data)
        console.log('data.hits: ', data.hits)
+
+       if(data.hits.length === 0){
+        Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+       }
+      
        return data;
       });
   }
