@@ -6,7 +6,7 @@ import Notiflix from 'notiflix';
 import getRefs from './get-refs';
 import lightBox from './lightBox';
 
-// let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
 
 const refs = getRefs();
 
@@ -23,13 +23,12 @@ export default class ImageApiService {
     this.endOfHits = false;
   }
 
- fetchResults() {
+/*  fetchResults() {
     const url = `${BASE_URL}/?key=${API_KEY}&q=${this.searchQuery}&image_type=${this.image_type}&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.perPage}`
     fetch(url)
       .then(response => response.json())
       .then(data => {
        this.incrementPage();
-      // this.totaleEndOfHits();
 
        console.log('page increment')
        this.totalHits = data.totalHits;
@@ -44,6 +43,19 @@ export default class ImageApiService {
         const markup = handlebarTemplate(data.hits);
         refs.galleryEl.innerHTML = markup;
        }
+      });
+  } */
+
+  fetchResults() {
+    const url = `${BASE_URL}/?key=${API_KEY}&q=${this.searchQuery}&image_type=${this.image_type}&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.perPage}`
+    return fetch(url)
+      .then(response => response.json())
+      .then(data => {
+       this.incrementPage();
+       console.log('this', this)
+       console.log('data: ', data)
+       console.log('data.hits: ', data.hits)
+       return data;
       });
   }
 

@@ -1,10 +1,12 @@
 // import './sass/main.scss';
 import handlebarTemplate from './template/handlebarTemplate';
+// import handlebarTemplate from '../template/handlebarTemplate.hbs';
 import axios from 'axios';
 import Notiflix from 'notiflix';
 import apiSettings from './settings';
 import getRefs from './js/get-refs';
 import ImageApiService from './js/api-service';
+
 
 
  const searchApiService = new ImageApiService();
@@ -24,10 +26,15 @@ import ImageApiService from './js/api-service';
   }
 
   searchApiService.resetPage();
-  searchApiService.fetchResults();
+  //searchApiService.fetchResults();
+  searchApiService.fetchResults().then(appendMarkup)
  }
 
  function onLoadMore(){
-   searchApiService.fetchResults();
+   searchApiService.fetchResults(appendMarkup);
  }
 
+function appendMarkup(results){
+  const markup = handlebarTemplate(results.hits);
+  refs.galleryEl.innerHTML = markup;
+}

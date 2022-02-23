@@ -1,9 +1,9 @@
 
  </div><div class="photo-card">
      {{#each this}}
-     <a href="{{webformatURL}}">
+     <a href="{{webformatURL}}" target="_blank" rel="noopener noreferrer">
  <img src="{{webformatURL}}" alt="" loading="lazy" />
-     </a>
+      </a>
   <div class="info">
     <p class="info-item">
       <b>Likes: {{likes}}</b>
@@ -17,6 +17,7 @@
     <p class="info-item">
       <b>Downloads: {{downloads}}</b>
     </p>
+   
   </div>
        {{/each}}
 </div>
