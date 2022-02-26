@@ -76,8 +76,8 @@ const callback = (entries, io) => {
   });
 };
 const options = {
-  rootMargin: '100px',
-  threshold: 0.5,
+  // rootMargin: '100px',
+  // threshold: 0.5,
 };
 const observer = new IntersectionObserver(callback, options);
 
