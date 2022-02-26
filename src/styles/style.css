@@ -26,4 +26,9 @@ body {
 button {
   color: cadetblue;
 }
+
+.button.is-hidden {
+  display: none;
+}
+
 /*# sourceMappingURL=style.css.map */

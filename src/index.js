@@ -1,20 +1,17 @@
 // import './sass/main.scss';
-import handlebarTemplate from './template/handlebarTemplate';
-// import handlebarTemplate from '../template/handlebarTemplate.hbs';
 import axios from 'axios';
 import Notiflix from 'notiflix';
 import apiSettings from './settings';
 import getRefs from './js/get-refs';
 import ImageApiService from './js/api-service';
-
-
+import lightBox from './js/lightBox';
 
  const searchApiService = new ImageApiService();
- 
+ let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+
  const refs = getRefs();
 
  refs.searchForm.addEventListener('submit', onSearch);
- refs.loadMoreButton.addEventListener('click', onLoadMore);
 
  function onSearch(event){
   event.preventDefault();
@@ -26,15 +23,63 @@ import ImageApiService from './js/api-service';
   }
 
   searchApiService.resetPage();
-  //searchApiService.fetchResults();
   searchApiService.fetchResults().then(appendMarkup)
  }
 
- function onLoadMore(){
-   searchApiService.fetchResults(appendMarkup);
- }
-
 function appendMarkup(results){
-  const markup = handlebarTemplate(results.hits);
+ renderList(results.hits)
+}
+
+function renderList(results) {
+  const markup = results
+    .map((result) => {
+      return `<div class="photo-card">
+      <a href="${result.webformatURL}" target="_blank" rel="noopener noreferrer">
+      <img src="${result.webformatURL}" alt="" loading="lazy" />
+      </a>
+      <div class="info">
+        <p class="info-item">
+          <b>${result.likes}</b>
+        </p>
+        <p class="info-item">
+          <b>${result.views}</b>
+        </p>
+        <p class="info-item">
+          <b>${result.comments}</b>
+        </p>
+        <p class="info-item">
+          <b>${result.downloads}</b>
+        </p>
+      </div>
+    </div>`;
+    })
+    .join("");
   refs.galleryEl.innerHTML = markup;
 }
+
+
+
+const callback = (entries, io) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && searchApiService.query !== '') {
+      searchApiService.fetchResults().then(
+        data => {
+
+        console.log(JSON.stringify(data)) 
+        searchApiService.incrementPage();
+        console.log('DATA from entry.isIntersecting')
+        console.log(entry.target);
+        appendMarkup(data);
+       
+      });
+    }
+  });
+};
+const options = {
+  rootMargin: '100px',
+  threshold: 0.5,
+};
+const observer = new IntersectionObserver(callback, options);
+
+observer.observe(refs.sentinel);
+
