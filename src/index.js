@@ -1,11 +1,9 @@
 // // import './sass/main.scss';
-// import axios from 'axios';
  import Notiflix from 'notiflix';
 import getRefs from './js/get-refs';
 import apiSettings from './settings';
 import lightBox from './js/lightBox';
 
-let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
 
  const refs = getRefs();
  const { BASE_URL, API_KEY } = apiSettings;
@@ -28,6 +26,23 @@ window.addEventListener('scroll', () => {
 });
 
 refs.searchForm.addEventListener('submit', onSearch);
+refs.galleryEl.addEventListener('click', onImageClick);
+
+
+let lightbox = new SimpleLightbox('.gallery a',   {
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+  enableKeyboard: true,
+});
+
+function onImageClick(evt) {
+  evt.preventDefault();
+  if(!evt.currentTarget.classList.contains('card')) {
+      return;
+  }
+  lightbox.open();
+};
 
 
  function onSearch(event) {
@@ -117,7 +132,10 @@ function addDataToDOM(data) {
  })
  .join(""); 
 
-	 container.appendChild(postElement);
+	container.appendChild(postElement);
 	loading.classList.remove('show');
 }
 
+//document.documentElement.scrollTop = 0;
+
+window.scrollTo(0, 0);
