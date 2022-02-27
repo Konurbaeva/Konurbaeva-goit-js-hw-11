@@ -59,27 +59,3 @@ function renderList(results) {
 
 
 
-const callback = (entries, io) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && searchApiService.query !== '') {
-      searchApiService.fetchResults().then(
-        data => {
-
-        console.log(JSON.stringify(data)) 
-        searchApiService.incrementPage();
-        console.log('DATA from entry.isIntersecting')
-        console.log(entry.target);
-        appendMarkup(data);
-       
-      });
-    }
-  });
-};
-const options = {
-  // rootMargin: '100px',
-  // threshold: 0.5,
-};
-const observer = new IntersectionObserver(callback, options);
-
-observer.observe(refs.sentinel);
-
