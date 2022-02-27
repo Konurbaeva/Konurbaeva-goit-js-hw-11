@@ -14,6 +14,8 @@ let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
  let searchValue = '';
  let page = 1;
  let per_page = 20;
+ let totalPages = null;
+ let endOfHits = false;
 
 const container = document.querySelector('.container');
 const loading = document.querySelector('.loading');
@@ -59,6 +61,13 @@ function showLoading() {
 	// load more data
 	setTimeout(getPost, 1000)
 }
+
+ function totaleEndOfHits() {
+    if (page === totalPages) {
+      endOfHits = true;
+      Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+    }
+  } 
 
 async function getPost() {
 
