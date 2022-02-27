@@ -69,7 +69,7 @@ import getRefs from './js/get-refs';
 //refs.galleryEl.insertAdjacentHTML("beforeend", renderList(results));
 
 
-const container = document.getElementById('.container');
+const container = document.querySelector('.container');
 const loading = document.querySelector('.loading');
 
 getPost();
@@ -98,43 +98,48 @@ async function getPost() {
 	const postResponse = await fetch(`https://pixabay.com/api/?key=25748459-63f23aee85add1030efa422f3&q=cat&image_type=photo&orientation=horizontal&safesearch=true&page=1&per_page=5`);
 	const postData = await postResponse.json();
 
-	
-	// const data = { post: postData };
-	// addDataToDOM(data);
 
+  console.log('POSTDATA', postData);
   addDataToDOM(postData);
 }
 
 function addDataToDOM(data) {
 	const postElement = document.createElement('div');
 	postElement.classList.add('photo-card');
-	postElement.innerHTML = `<div class="photo-card-item">
-    <img src="${data.webformatURL}" alt="" loading="lazy" />
-    <div class="info">
-      <p class="info-item">
-        <b>${data.likes}</b>
-      </p>
-      <p class="info-item">
-        <b>${data.views}</b>
-      </p>
-      <p class="info-item">
-        <b>${data.comments}</b>
-      </p>
-      <p class="info-item">
-        <b>${data.downloads}</b>
-      </p>
-    </div>
-  </div>`;
-  ;
+
+
+  postElement.innerHTML = data.hits
+ .map((result) => {
+   return `<div class="photo-card-item">
+   <a href="${result.largeImageURL}" target="_blank" rel="noopener noreferrer">
+   <img src="${result.webformatURL}" alt="" loading="lazy" />
+   </a>
+   <div class="info">
+     <p class="info-item">
+       <b>${result.likes}</b>
+     </p>
+     <p class="info-item">
+       <b>${result.views}</b>
+     </p>
+     <p class="info-item">
+       <b>${result.comments}</b>
+     </p>
+     <p class="info-item">
+       <b>${result.downloads}</b>
+     </p>
+   </div>
+ </div>`;
+ })
+ .join(""); 
 
   console.log('================================DATA', data)
-
+  console.log('================================DATA.HITS', data.hits);
   console.log('================================postElement', postElement)
 
-  refs.galleryEl.insertAdjacentHTML("beforeend", postElement);
+ // refs.galleryEl.insertAdjacentHTML("beforeend", postElement);
 
-	// container.appendChild(postElement);
+	 container.appendChild(postElement);
 	
-	// loading.classList.remove('show');
+	loading.classList.remove('show');
 }
 
