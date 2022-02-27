@@ -1,7 +1,6 @@
 // // import './sass/main.scss';
 // import axios from 'axios';
  import Notiflix from 'notiflix';
-// import apiSettings from './settings';
 import getRefs from './js/get-refs';
 import apiSettings from './settings';
 import lightBox from './js/lightBox';
@@ -13,7 +12,7 @@ let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
 
  let searchValue = '';
  let page = 1;
- let per_page = 20;
+ let per_page = 5;
  let totalPages = null;
  let endOfHits = false;
 
@@ -23,10 +22,7 @@ const loading = document.querySelector('.loading');
 window.addEventListener('scroll', () => {
 	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 	
-	console.log( { scrollTop, scrollHeight, clientHeight });
-	
 	if(clientHeight + scrollTop >= scrollHeight - 5) {
-		// show the loading animation
 		showLoading();
 	}
 });
@@ -43,8 +39,8 @@ refs.searchForm.addEventListener('submit', onSearch);
     if (searchValue === '') {
      return  Notiflix.Notify.warning('Cannot be empty. Please provide your searching word!');   
     } else {
-     // clearPage();
-      getPost();
+      clearPage();
+      getData();
     }
  }
 
@@ -57,19 +53,16 @@ refs.searchForm.addEventListener('submit', onSearch);
 function showLoading() {
 	loading.classList.add('show');
   page += 1;
-	
-	// load more data
-	setTimeout(getPost, 1000)
+
+  if (page === totalPages) {
+    endOfHits = true;
+    Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
+  }
+
+	setTimeout(getData, 1000)
 }
 
- function totaleEndOfHits() {
-    if (page === totalPages) {
-      endOfHits = true;
-      Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
-    }
-  } 
-
-async function getPost() {
+async function getData() {
 
 const postResponse = await fetch(`${BASE_URL}/?key=${API_KEY}&q=${searchValue}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${per_page}`);
 
@@ -83,11 +76,15 @@ const postData = await postResponse.json();
 }
 
 function clearPage() {
+  page = 1;
 
-  document.classList.remove('photo-card');
-  //page = 1;
-//  refs.galleryEl.innerHTML = '';
- //refs.containerEl.innerHTML = '';
+ const photoCardElements = document.getElementsByClassName('photo-card');
+ console.log('photoCardElements.length: ',photoCardElements.length);
+ if (photoCardElements.length > 0) {
+  for (var i = photoCardElements.length - 1; i >= 0; --i) {
+    photoCardElements[i].remove();
+  }
+ } 
 }
 
 
@@ -104,28 +101,23 @@ function addDataToDOM(data) {
    </a>
    <div class="info">
      <p class="info-item">
-       <b>${result.likes}</b>
+       <b>Likes ${result.likes}</b>
      </p>
      <p class="info-item">
-       <b>${result.views}</b>
+       <b>Views ${result.views}</b>
      </p>
      <p class="info-item">
-       <b>${result.comments}</b>
+       <b>Comments${result.comments}</b>
      </p>
      <p class="info-item">
-       <b>${result.downloads}</b>
+       <b>Downloads${result.downloads}</b>
      </p>
    </div>
  </div>`;
  })
  .join(""); 
 
-  console.log('================================DATA', data)
-  console.log('================================DATA.HITS', data.hits);
-  console.log('================================postElement', postElement)
-
 	 container.appendChild(postElement);
-	
 	loading.classList.remove('show');
 }
 
