@@ -136,6 +136,3 @@ function addDataToDOM(data) {
 	loading.classList.remove('show');
 }
 
-//document.documentElement.scrollTop = 0;
-
-window.scrollTo(0, 0);
