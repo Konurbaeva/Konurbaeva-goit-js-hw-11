@@ -5,11 +5,13 @@ import apiSettings from './settings';
 import getRefs from './js/get-refs';
 import ImageApiService from './js/api-service';
 import lightBox from './js/lightBox';
+import InfiniteScroll from './js/if';
 
  const searchApiService = new ImageApiService();
  let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
 
  const refs = getRefs();
+ const { BASE_URL, API_KEY } = apiSettings;
 
  refs.searchForm.addEventListener('submit', onSearch);
 
@@ -27,14 +29,19 @@ import lightBox from './js/lightBox';
  }
 
 function appendMarkup(results){
- renderList(results.hits)
+ //renderList(results.hits)
+ console.log('appendMarkup results: ', results);
+ renderList(results)
 }
 
 function renderList(results) {
-  const markup = results
+  console.log('results: ', results)
+  console.log('results.hits: ', results.hits)
+
+  const markup = results.hits
     .map((result) => {
       return `<div class="photo-card">
-      <a href="${result.webformatURL}" target="_blank" rel="noopener noreferrer">
+      <a href="${result.largeImageURL}" target="_blank" rel="noopener noreferrer">
       <img src="${result.webformatURL}" alt="" loading="lazy" />
       </a>
       <div class="info">
@@ -54,8 +61,9 @@ function renderList(results) {
     </div>`;
     })
     .join("");
+  //return markup;
   refs.galleryEl.innerHTML = markup;
 }
 
 
-
+//refs.galleryEl.insertAdjacentHTML("beforeend", renderList(results));
