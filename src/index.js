@@ -1,80 +1,22 @@
 // // import './sass/main.scss';
 // import axios from 'axios';
-// import Notiflix from 'notiflix';
+ import Notiflix from 'notiflix';
 // import apiSettings from './settings';
 import getRefs from './js/get-refs';
-// import ImageApiService from './js/api-service';
-// import lightBox from './js/lightBox';
-//import InfiniteScroll from './js/if';
+import apiSettings from './settings';
+import lightBox from './js/lightBox';
 
-//  const searchApiService = new ImageApiService();
-//  let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
 
  const refs = getRefs();
-//  const { BASE_URL, API_KEY } = apiSettings;
+ const { BASE_URL, API_KEY } = apiSettings;
 
-//  refs.searchForm.addEventListener('submit', onSearch);
-
-//  function onSearch(event){
-//   event.preventDefault();
-//   searchApiService.clearInputOnFocus();
-
-//   searchApiService.query = refs.inputEl.value;
-//   if (searchApiService.query === '') {
-//     return  Notiflix.Notify.warning('Cannot be empty. Please provide your searching word!');
-//   }
-
-//   searchApiService.resetPage();
-//   searchApiService.fetchResults().then(appendMarkup)
-//  }
-
-// function appendMarkup(results){
-//  //renderList(results.hits)
-//  console.log('appendMarkup results: ', results);
-//  renderList(results)
-// }
-
-// function renderList(results) {
-//   console.log('results: ', results)
-//   console.log('results.hits: ', results.hits)
-
-//   const markup = results.hits
-//     .map((result) => {
-//       return `<div class="photo-card">
-//       <a href="${result.largeImageURL}" target="_blank" rel="noopener noreferrer">
-//       <img src="${result.webformatURL}" alt="" loading="lazy" />
-//       </a>
-//       <div class="info">
-//         <p class="info-item">
-//           <b>${result.likes}</b>
-//         </p>
-//         <p class="info-item">
-//           <b>${result.views}</b>
-//         </p>
-//         <p class="info-item">
-//           <b>${result.comments}</b>
-//         </p>
-//         <p class="info-item">
-//           <b>${result.downloads}</b>
-//         </p>
-//       </div>
-//     </div>`;
-//     })
-//     .join("");
-//   //return markup;
-//   refs.galleryEl.innerHTML = markup;
-// }
-
-
-//refs.galleryEl.insertAdjacentHTML("beforeend", renderList(results));
-
+ let searchValue = '';
+ let page = 1;
+ let per_page = 20;
 
 const container = document.querySelector('.container');
 const loading = document.querySelector('.loading');
-
-getPost();
-getPost();
-getPost();
 
 window.addEventListener('scroll', () => {
 	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
@@ -87,21 +29,58 @@ window.addEventListener('scroll', () => {
 	}
 });
 
+refs.searchForm.addEventListener('submit', onSearch);
+
+
+ function onSearch(event) {
+  event.preventDefault();
+  clearInputOnFocus();
+
+  searchValue = refs.inputEl.value;
+
+    if (searchValue === '') {
+     return  Notiflix.Notify.warning('Cannot be empty. Please provide your searching word!');   
+    } else {
+     // clearPage();
+      getPost();
+    }
+ }
+
+  function clearInputOnFocus(){
+    refs.inputEl.addEventListener('focus', (event) => {
+     event.target.value = '';    
+   }) }
+
+
 function showLoading() {
 	loading.classList.add('show');
+  page += 1;
 	
 	// load more data
 	setTimeout(getPost, 1000)
 }
 
 async function getPost() {
-	const postResponse = await fetch(`https://pixabay.com/api/?key=25748459-63f23aee85add1030efa422f3&q=cat&image_type=photo&orientation=horizontal&safesearch=true&page=1&per_page=5`);
-	const postData = await postResponse.json();
 
+const postResponse = await fetch(`${BASE_URL}/?key=${API_KEY}&q=${searchValue}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${per_page}`);
 
-  console.log('POSTDATA', postData);
-  addDataToDOM(postData);
+const postData = await postResponse.json();
+
+    if (postData.hits.length ===0) {
+      Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+    } else {
+      addDataToDOM(postData);
+    }
 }
+
+function clearPage() {
+
+  document.classList.remove('photo-card');
+  //page = 1;
+//  refs.galleryEl.innerHTML = '';
+ //refs.containerEl.innerHTML = '';
+}
+
 
 function addDataToDOM(data) {
 	const postElement = document.createElement('div');
@@ -135,8 +114,6 @@ function addDataToDOM(data) {
   console.log('================================DATA', data)
   console.log('================================DATA.HITS', data.hits);
   console.log('================================postElement', postElement)
-
- // refs.galleryEl.insertAdjacentHTML("beforeend", postElement);
 
 	 container.appendChild(postElement);
 	
