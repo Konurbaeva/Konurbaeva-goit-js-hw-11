@@ -1,57 +1,58 @@
-import InfiniteScroll from 'infinite-scroll';
-import ImageApiService from './api-service';
-import apiSettings from '../settings';
-import getRefs from './get-refs';
+// import InfiniteScroll from 'infinite-scroll';
+// import ImageApiService from './api-service';
+// import apiSettings from '../settings';
+// import getRefs from './get-refs';
 
-console.log('InfiniteScroll ', InfiniteScroll)
+// //console.log('InfiniteScroll ', InfiniteScroll)
 
-const { BASE_URL, API_KEY } = apiSettings;
-const refs = getRefs();
+// const { BASE_URL, API_KEY } = apiSettings;
+// const refs = getRefs();
 
-// refs.inputEl.value
+// let infScroll = new InfiniteScroll('.container', {
+//     // options
+//     responseType: 'text',
+//     history: false,
+//     isLoading: true,
+//    // append: true,
+//     path() {
+//       // let pageNumber = this.loadCount + 1;
+//       // return `${BASE_URL}/?key=${API_KEY}&q=${refs.inputEl.value}&page=${pageNumber}`; 
 
-let infScroll = new InfiniteScroll( '.container', {
-    // options
-    responseType: 'text',
-    path: function() {
-       let pageNumber = this.loadCount + 1;
-       // return `/page=${pageNumber}`; 
+//       return `${BASE_URL}/?key=${API_KEY}&q=cat&page=${this.pageIndex}`; 
+//       }
+//   }); 
 
-       return `${BASE_URL}/?key=${API_KEY}&q=${refs.inputEl.value}&image_type=photo&orientation=horizontal&safesearch=true&page=${pageNumber}`; 
-      }
-  });
+//   infScroll.loadNextPage();
 
-  infScroll.on('load', (response, path) => {
-    console.log('JSON from infScroll' , JSON.parse(response));
+//   console.log(infScroll)
 
-  });
+//   setTimeout(() => {
+//       infScroll.loadNextPage();
+//   }, 1000);
 
-/* const markup = results.hits
-.map((result) => {
-  return `<div class="photo-card">
-  <a href="${result.largeImageURL}" target="_blank" rel="noopener noreferrer">
-  <img src="${result.webformatURL}" alt="" loading="lazy" />
-  </a>
-  <div class="info">
-    <p class="info-item">
-      <b>${result.likes}</b>
-    </p>
-    <p class="info-item">
-      <b>${result.views}</b>
-    </p>
-    <p class="info-item">
-      <b>${result.comments}</b>
-    </p>
-    <p class="info-item">
-      <b>${result.downloads}</b>
-    </p>
-  </div>
-</div>`;
-})
-.join(""); 
+//   infScroll.on('load', (response, path) => {
+//     console.log('JSON from infScroll' , JSON.parse(response));
 
-const fragment = new DocumentFragment();
-const d = document.createElement('div');
-fragment.innerHTML = markup;
-console.log(fragment);
-*/
+//    // infScroll.appendItems(JSON.parse(response.hits));
+
+//    // infScroll.appendItems(getFetch);
+
+//     // тут по шаблну сделали строку с тегами
+
+//   // потом кинули в фрагмент
+//   // фрагмент передали в infScroll.appendItems(фоагмент)
+//   const markup = '<p>gsdgdgd</p>'
+// const fragment = new DocumentFragment();
+// fragment.innerHTML = markup;
+
+// infScroll.appendItems(fragment);
+
+//   }); 
+
+// const markup = '<p>gsdgdgd</p>'
+// const fragment = new DocumentFragment();
+// fragment.innerHTML = markup;
+
+// console.log(fragment);
+
+
