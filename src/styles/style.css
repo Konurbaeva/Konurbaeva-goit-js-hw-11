@@ -1,8 +1,19 @@
 body {
   font-family: 100% Helvetica, sans-serif;
-  text-align: center;
   background-color: #fff;
+  text-align: center;
 }
+
+.photo-card-item {
+  display: block;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: teal;
+}
+
+/* .photo-card-item img{
+
+} */
 .search-form {
   background-color: teal;
   border: 1px solid;
@@ -12,8 +23,19 @@ button {
   color: cadetblue;
 }
 
-.button.is-hidden {
-  display: none;
+.flex-container {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
+.flex-container > div {
+  margin: 10px;
+  padding: 20px;
+}
 /*# sourceMappingURL=style.css.map */

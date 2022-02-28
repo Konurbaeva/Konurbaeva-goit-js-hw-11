@@ -5,14 +5,38 @@ $primary-color: #fff;
 body {
     font-family: 100% $font-stack;
     background-color: $primary-color;
+    text-align: center;
 }
+
+.photo-card-item {
+   // border: 5px solid;
+    display: block;
+    box-sizing: border-box;
+    background-color: teal;
+}
+
+/* .photo-card-item img{
+
+} */
+
 
 .search-form {
     background-color: teal;
-  
     border: 1px solid;
 }
 
 button{
     color:cadetblue;
 } 
+
+.flex-container {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .flex-container > div {
+   
+    margin: 10px;
+    padding: 20px;
+  }

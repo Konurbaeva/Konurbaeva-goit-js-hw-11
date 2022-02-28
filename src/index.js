@@ -110,7 +110,10 @@ function addDataToDOM(data) {
 
   postElement.innerHTML = data.hits
  .map((result) => {
-   return `<div class="photo-card-item">
+   return `
+   
+   <div class="flex-container">
+   <div class="photo-card-item">
    <a href="${result.largeImageURL}" target="_blank" rel="noopener noreferrer">
    <img src="${result.webformatURL}" alt="" loading="lazy" />
    </a>
@@ -128,7 +131,7 @@ function addDataToDOM(data) {
        <b>Downloads${result.downloads}</b>
      </p>
    </div>
- </div>`;
+ </div></div>`;
  })
  .join(""); 
 
