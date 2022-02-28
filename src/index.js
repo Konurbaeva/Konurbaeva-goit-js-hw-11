@@ -10,7 +10,7 @@ import lightBox from './js/lightBox';
 
  let searchValue = '';
  let page = 1;
- let per_page = 5;
+ let per_page = 6;
  let totalPages = null;
  let endOfHits = false;
 
@@ -114,22 +114,14 @@ function addDataToDOM(data) {
    
    <div class="flex-container">
    <div class="photo-card-item">
-   <a href="${result.largeImageURL}" target="_blank" rel="noopener noreferrer">
+   <a href="${result.webformatURL}" target="_blank" rel="noopener noreferrer">
    <img src="${result.webformatURL}" alt="" loading="lazy" />
    </a>
    <div class="info">
-     <p class="info-item">
-       <b>Likes ${result.likes}</b>
-     </p>
-     <p class="info-item">
-       <b>Views ${result.views}</b>
-     </p>
-     <p class="info-item">
-       <b>Comments${result.comments}</b>
-     </p>
-     <p class="info-item">
-       <b>Downloads${result.downloads}</b>
-     </p>
+       <b>Likes </b>${result.likes}
+       <b>Views </b>${result.views}
+       <b>Comments </b>${result.comments}
+       <b>Downloads </b>${result.downloads}
    </div>
  </div></div>`;
  })
