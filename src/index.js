@@ -19,6 +19,14 @@ import lightBox from './js/lightBox';
   event.preventDefault();
 
   searchApiService.query = refs.inputEl.value;
+
+/*   if (searchApiService.query === '' ) {
+    return  Notiflix.Notify.warning('Cannot be empty. Please provide your searching word!');
+  } */
+
+  if (searchApiService.query.trim() === '') {
+    return  Notiflix.Notify.warning('Cannot be empty. Please provide your searching word!');
+  }
   searchApiService.resetPage();
   searchApiService.fetchArticles();
  }
@@ -26,4 +34,3 @@ import lightBox from './js/lightBox';
  function onLoadMore(){
    searchApiService.fetchArticles();
  }
-
