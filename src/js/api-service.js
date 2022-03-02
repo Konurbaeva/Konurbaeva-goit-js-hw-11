@@ -12,7 +12,7 @@ const { BASE_URL, API_KEY } = apiSettings;
 export default class ImageApiService {
   constructor() {
     this.searchQuery = '';
-    this.page = 0;
+    this.page = 1;
     this.perPage = 5;
     this.image_type = 'photo';
     this.orientation= 'horizontal';
@@ -37,10 +37,9 @@ export default class ImageApiService {
        refs.loadMoreButton.textContent = "Load more";
       } 
       // add pagination so that this.page === 2 and we can see Load more button
-       
-    /*    if (this.page > this.totalPages) {
+      if (this.page > this.totalPages) {
         return alert('you reached the limit');
-      } */
+      } 
 
        else {
         const markup = handlebarTemplate(data.hits);
