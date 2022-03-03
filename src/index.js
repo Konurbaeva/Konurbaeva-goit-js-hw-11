@@ -29,8 +29,8 @@ import LoadMoreBtn from './js/load-more-btn';
    searchApiService.query = refs.inputEl.value;
  
    if (searchApiService.query === '') {
-     return alert('cannot be empty');
-   }
+    return  Notiflix.Notify.warning('Cannot be empty. Please provide your searching word!');
+  }
  
    loadMoreBtn.show();
    searchApiService.resetPage();

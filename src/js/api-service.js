@@ -20,7 +20,7 @@ const { BASE_URL, API_KEY } = apiSettings;
        if (page > 1) {
        refs.loadMoreButton.textContent = "Load more";
       } 
-      // add pagination so that this.page === 2 and we can see Load more button
+  
       if (page > totalPages) {
         console.log('you reached the limit')
       } 
