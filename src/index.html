@@ -10,6 +10,20 @@
     <!-- Так добавляются фрагменты в главные HTML-файлы страниц. -->
     <include src="./partials/form.html"></include>
     <include src="./partials/gallery.html"></include>
+    <ul class="articles js-articles-container"></ul>
+    <button
+    type="button"
+    class="btn btn-primary button"
+    data-action="load-more"
+  >
+    <span
+      class="spinner-border spinner-border-sm spinner is-hidden"
+      role="status"
+      aria-hidden="true"
+    ></span>
+  
+    <span class="label">Load more</span>
+  </button>
     <!-- Скрипт идёт последним в разметке. В нём уже подключен главный SASS-файл. -->
     <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
     <script src="./index.js"></script>
