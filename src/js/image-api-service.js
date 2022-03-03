@@ -13,7 +13,7 @@ export default class ImageApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
-    this.perPage = 5;
+    this.perPage = 20;
     this.image_type = 'photo';
     this.orientation= 'horizontal';
     this.safesearch = true;
@@ -28,19 +28,11 @@ export default class ImageApiService {
        if(data.hits.length === 0){
         Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
        }  
-      /*  if (this.page > 1) {
-       refs.loadMoreButton.textContent = "Load more";
-      } 
-      // add pagination so that this.page === 2 and we can see Load more button
+     
       if (this.page > this.totalPages) {
-        return alert('you reached the limit');
+        Notiflix.Notify.failure('you reached the limit');
       } 
-       else {
-        const markup = handlebarTemplate(data.hits);
-        refs.galleryEl.innerHTML = markup;
-       }
-        */
-
+      
        else {
           const markup = data.hits
             .map(({ webformatURL, likes, views,comments,downloads}) => {

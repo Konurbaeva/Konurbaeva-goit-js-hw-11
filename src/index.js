@@ -15,8 +15,6 @@ import LoadMoreBtn from './js/load-more-btn';
 
  let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
 
-
- const fetchPostsBtn = document.querySelector(".load-more");
  const loadMoreBtn = new LoadMoreBtn({
   selector: '[data-action="load-more"]',
   hidden: true,
@@ -36,7 +34,10 @@ import LoadMoreBtn from './js/load-more-btn';
  
    loadMoreBtn.show();
    searchApiService.resetPage();
-   //clearArticlesContainer();
+   
+   clearArticlesContainer();
+   clearInputOnFocus();
+
    fetchArticles();
  }
  
@@ -48,9 +49,12 @@ import LoadMoreBtn from './js/load-more-btn';
      loadMoreBtn.enable();
    });
  }
- 
 
  function clearArticlesContainer() {
-   refs.articlesContainer.innerHTML = '';
+  refs.galleryEl.innerHTML = '';
  }
  
+ function clearInputOnFocus(){
+  refs.inputEl.addEventListener('focus', (event) => {
+   event.target.value = '';    
+ }) }
