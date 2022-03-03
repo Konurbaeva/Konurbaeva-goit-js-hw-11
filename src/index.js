@@ -9,7 +9,6 @@ import lightBox from './js/lightBox';
 import fetchResults from './js/api-service';
 import renderPosts from './js/api-service';
 import LoadMoreBtn from './js/load-more-btn';
-import handlebarTemplate from './template/handlebarTemplate.hbs';
 
  const refs = getRefs();
  const searchApiService = new ImageApiService();
@@ -45,14 +44,12 @@ import handlebarTemplate from './template/handlebarTemplate.hbs';
  function fetchArticles() {
    loadMoreBtn.disable();
    searchApiService.fetchArticles().then(data => {
-     appendArticlesMarkup(data);
+    console.log('DATA')
      loadMoreBtn.enable();
    });
  }
  
-  function appendArticlesMarkup(data) {
-   refs.articlesContainer.insertAdjacentHTML('beforeend', handlebarTemplate(data));
- }
+
   
  function clearArticlesContainer() {
    refs.articlesContainer.innerHTML = '';
