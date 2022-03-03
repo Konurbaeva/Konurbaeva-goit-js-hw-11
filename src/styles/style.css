@@ -37,4 +37,9 @@ body {
 .button > .spinner.is-hidden {
   display: none;
 }
+
+.photo-card-item {
+  background-color: teal;
+  width: 100%;
+}
 /*# sourceMappingURL=style.css.map */

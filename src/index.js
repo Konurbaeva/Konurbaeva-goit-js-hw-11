@@ -5,15 +5,20 @@ import apiSettings from './settings';
 import getRefs from './js/get-refs';
 //import ImageApiService from './js/api-service';
 import ImageApiService from './js/image-api-service';
-import lightBox from './js/lightBox';
+
 import fetchResults from './js/api-service';
 import renderPosts from './js/api-service';
 import LoadMoreBtn from './js/load-more-btn';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+// import lightBox from './js/lightBox';
+
 
  const refs = getRefs();
  const searchApiService = new ImageApiService();
 
- let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+ //let lightbox = new SimpleLightbox('.gallery a', { /* options */ });
+ let lightBox = new SimpleLightbox('.gallery a', { /* options */ });
 
  const loadMoreBtn = new LoadMoreBtn({
   selector: '[data-action="load-more"]',
