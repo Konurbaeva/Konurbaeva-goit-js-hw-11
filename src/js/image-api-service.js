@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { pixabay } from 'pixabay';
 import apiSettings from '../settings';
-import handlebarTemplate from '../template/handlebarTemplate.hbs';
 import Notiflix from 'notiflix';
 import getRefs from './get-refs';
 //import renderPosts from '../js/api-service';
