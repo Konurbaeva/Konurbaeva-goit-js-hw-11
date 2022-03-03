@@ -28,7 +28,6 @@ import LoadMoreBtn from './js/load-more-btn';
  function onSearch(e) {
    e.preventDefault();
  
-   //searchApiService.query = e.currentTarget.query.value;
    searchApiService.query = refs.inputEl.value;
  
    if (searchApiService.query === '') {
@@ -44,13 +43,13 @@ import LoadMoreBtn from './js/load-more-btn';
  function fetchArticles() {
    loadMoreBtn.disable();
    searchApiService.fetchArticles().then(data => {
-    console.log('DATA')
+    console.log('DATA', data)
+    
      loadMoreBtn.enable();
    });
  }
  
 
-  
  function clearArticlesContainer() {
    refs.articlesContainer.innerHTML = '';
  }

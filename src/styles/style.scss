@@ -8,26 +8,25 @@ body {
     background-color: $primary-color;
 }
 
-.photo-card {
-    display: inline-block;
-    width: 100%;
-    max-width: 350px;
-    margin: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: left;
-    background: #fff;
-    box-shadow: 0 6px 10px -5px rgba(0, 0, 0, 0.2);
+.flex-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.flex-container > div {
+ 
+  margin: 10px;
+  padding: 20px;
 }
 
 .search-form {
     background-color: teal;
-  
     border: 1px solid;
 }
 
 .button {
-    display: block;
+   // display: block;
     margin-left: auto;
     margin-right: auto;
   }
