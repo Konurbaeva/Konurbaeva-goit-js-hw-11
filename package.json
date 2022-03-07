@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "axios": "^0.26.0",
-    "infinite-scroll": "^4.0.1",
     "js": "^0.1.0",
     "lodash.debounce": "^4.0.8",
     "notiflix": "^3.2.4",
