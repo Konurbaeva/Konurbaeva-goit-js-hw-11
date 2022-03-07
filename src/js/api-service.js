@@ -6,22 +6,15 @@ import getRefs from './get-refs';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-
-
 const refs = getRefs();
-let gallery = new SimpleLightbox('.gallery a');
 
 refs.galleryEl.addEventListener('click', onImageClick);
 
-async function onImageClick(){
-  gallery.on('show.simplelightbox', function () {
-	// do something…
-  console.log('happy case');
-});
-
-gallery.on('error.simplelightbox', function (e) {
-	console.log(e); // some usefull information
-});
+async function onImageClick(event){
+if(event.target.nodeName === 'IMG'){
+  event.preventDefault();
+  new SimpleLightbox('.gallery a', { /* options */ });
+}
 }
 
 
