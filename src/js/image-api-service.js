@@ -21,11 +21,11 @@ export default class ImageApiService {
   }
 
   async fetchArticles() {
-    const url = `${BASE_URL}/?key=${API_KEY}&q=${this.searchQuery}&image_type=${this.image_type}&orientation=${this.orientation}&safesearch=${this.safesearch}&page=${this.page}&per_page=${this.perPage}`
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-       if(data.hits.length === 0){
+   
+    const response = await axios.get(
+      `${BASE_URL}/?key=${API_KEY}&q=${this.searchQuery}&image_type=${this.image_type}&orientation=${this.orientation}&safesearch=${this.safesearch}&page=${this.page}&per_page=${this.perPage}`
+    ).then(response => {
+       if(response.data.hits.length === 0){
         Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
        }  
      
@@ -34,7 +34,7 @@ export default class ImageApiService {
       } 
       
        else {
-          const markup = data.hits
+          const markup = response.data.hits
             .map(({ webformatURL, likes, views,comments,downloads}) => {
               return `
               <div class="flex-container">

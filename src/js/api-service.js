@@ -10,11 +10,10 @@ const { BASE_URL, API_KEY } = apiSettings;
 
   async function fetchResults() {
 
-    const url = `${BASE_URL}/?key=${API_KEY}&q=${searchQuery}&page=${page}&per_page=${per_page}`
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-       if(data.hits.length === 0){
+    const response = await axios.get(
+      `${BASE_URL}/?key=${API_KEY}&q=${searchQuery}&page=${page}&per_page=${per_page}`
+    ).then(data => {
+       if(response.data.hits.length === 0){
         Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
        }  
        if (page > 1) {
