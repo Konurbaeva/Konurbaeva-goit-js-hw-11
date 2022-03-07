@@ -1,10 +1,10 @@
 body {
   font-family: 100% Helvetica, sans-serif;
-  text-align: center;
   background-color: #fff;
+  text-align: center;
 }
 
-.flex-container {
+ .flex-container {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -13,12 +13,15 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+          width: calc((75% - 10px) / 4);
+          margin-left: 2%;
 }
 
-.flex-container > div {
-  margin: 10px;
-  padding: 20px;
+
+ img {
+  width: 75%;
 }
+
 
 .search-form {
   background-color: teal;
@@ -36,10 +39,5 @@ body {
 
 .button > .spinner.is-hidden {
   display: none;
-}
-
-.photo-card-item {
-  background-color: teal;
-  width: 100%;
 }
 /*# sourceMappingURL=style.css.map */
