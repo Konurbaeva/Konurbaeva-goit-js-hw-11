@@ -40,7 +40,7 @@ export default class ImageApiService {
               <div class="flex-container">
                <div class="photo-card-item">
                <a href="${webformatURL}" target="_blank" rel="noopener noreferrer">
-               <img src="${webformatURL}" alt="" loading="lazy" />
+               <img src="${webformatURL}" alt="" loading="lazy" class="images" />
                </a>
                <div class="info">
                    <b>Likes </b>${likes}

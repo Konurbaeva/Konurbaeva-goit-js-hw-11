@@ -14,6 +14,8 @@ import LoadMoreBtn from './js/load-more-btn';
  const refs = getRefs();
  const searchApiService = new ImageApiService();
 
+ 
+
  const loadMoreBtn = new LoadMoreBtn({
   selector: '[data-action="load-more"]',
   hidden: true,
