@@ -45,8 +45,6 @@ import LoadMoreBtn from './js/load-more-btn';
  function fetchArticles() {
    loadMoreBtn.disable();
    searchApiService.fetchArticles().then(data => {
-    console.log('DATA', data)
-    
      loadMoreBtn.enable();
    });
  }
