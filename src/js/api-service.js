@@ -28,6 +28,10 @@ const { BASE_URL, API_KEY } = apiSettings;
        if(response.data.hits.length === 0){
         Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
        }  
+       else {
+        Notiflix.Notify.success(`Hooray! We found ${response.data.totalHits} images.`);
+       } 
+
        if (page > 1) {
        refs.loadMoreButton.textContent = "Load more";
       } 

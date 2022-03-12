@@ -28,7 +28,11 @@ export default class ImageApiService {
        if(response.data.hits.length === 0){
         Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
        }  
-     
+
+     else {
+        Notiflix.Notify.success(`Hooray! We found ${response.data.totalHits} images.`);
+       } 
+
       if (this.page > this.totalPages) {
         Notiflix.Notify.failure('you reached the limit');
       } 
